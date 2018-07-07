@@ -3,6 +3,7 @@ const router = express.Router();
 
 const auth = require('./helpers/auth');
 const Room = require('../models/room');
+const posts = require('./posts');
 
 // Rooms index
 router.get('/', (req, res, next) => {
@@ -57,5 +58,7 @@ router.post('/', auth.requireLogin, (req, res, next) => {
     return res.redirect('/rooms');
   });
 });
+
+router.use('/:roomId/posts', posts)
 
 module.exports = router;
