@@ -28,17 +28,19 @@ router.get('/:id', auth.requireLogin, (req, res, next) => {
   Room.findById(req.params.id, function(err, room) {
     if(err) { console.error(err) };
 
-    Post.find({ room: room }, function(err, posts) {
-      if(err) { console.error(err) };
-      posts = posts.sort(function(a,b) {
-        if (a.points < b.points) {
-          return 1;
-        }
-        if (a.points > b.points) {
+    Post.find({ room: room })
+      .populate('comments')
+      .exec(function(err, posts) {
+        if(err) { console.error(err) };
+        posts = posts.sort(function(a,b) {
+          if (a.points < b.points) {
+            return 1;
+          }
+          if (a.points > b.points) {
           return -1;
-        }
-        return 0;
-      });
+          }
+          return 0;
+        });
       res.render('rooms/show', { room: room, posts: posts, roomId: req.params.id });
     });
   });
