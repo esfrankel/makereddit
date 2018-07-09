@@ -23,11 +23,16 @@ router.get('/new', auth.requireLogin, (req, res, next) => {
 });
 
 // Rooms show
+
 router.get('/:id', auth.requireLogin, (req, res, next) => {
   Room.findById(req.params.id, function(err, room) {
-    if(err) { console.error(err); }
+    if(err) { console.error(err) };
 
-    res.render('rooms/show', { room: room });
+    Post.find({ room: room }, function(err, posts) {
+      if(err) { console.error(err) };
+
+      res.render('rooms/show', { room: room, posts: posts });
+    });
   });
 });
 
@@ -61,17 +66,5 @@ router.post('/', auth.requireLogin, (req, res, next) => {
 });
 
 router.use('/:roomId/posts', posts)
-
-router.get('/:id', auth.requireLogin, (req, res, next) => {
-  Room.findById(req.params.id, function(err, room) {
-    if(err) { console.error(err) };
-
-    Post.find({ room: room }, function(err, posts) {
-      if(err) { console.error(err) };
-
-      res.render('rooms/show', { room: room, posts: posts });
-    });
-  });
-});
 
 module.exports = router;
