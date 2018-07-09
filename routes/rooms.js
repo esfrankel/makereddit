@@ -3,8 +3,8 @@ const router = express.Router();
 
 const auth = require('./helpers/auth');
 const Room = require('../models/room');
-const Post = require('../models/posts');
 const posts = require('./posts');
+const Post = require('../models/posts');
 
 // Rooms index
 router.get('/', (req, res, next) => {
