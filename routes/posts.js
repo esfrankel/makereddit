@@ -3,6 +3,7 @@ const router = express.Router({mergeParams: true});
 const auth = require('./helpers/auth');
 const Room = require('../models/room');
 const Post = require('../models/posts');
+const comments = require('./comments');
 
 router.get('/new', auth.requireLogin, (req, res, next) => {
   Room.findById(req.params.roomId, function(err, room) {
@@ -27,6 +28,6 @@ router.post('/', auth.requireLogin, (req, res, next) => {
   });
 });
 
-router.use('/:postId/comments', commentsRouter);
+router.use('/:postId/comments', comments);
 
 module.exports = router;
