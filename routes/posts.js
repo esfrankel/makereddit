@@ -25,6 +25,8 @@ router.post('/', auth.requireLogin, (req, res, next) => {
       return res.redirect(`/rooms/${room._id}`);
     });
   });
-})
+});
+
+router.use('/:postId/comments', commentsRouter);
 
 module.exports = router;
