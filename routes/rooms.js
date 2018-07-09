@@ -31,6 +31,8 @@ router.get('/:id', auth.requireLogin, (req, res, next) => {
     Post.find({ room: room }, function(err, posts) {
       if(err) { console.error(err) };
 
+      posts = posts.sort({ points: -1 });
+
       res.render('rooms/show', { room: room, posts: posts });
     });
   });
