@@ -1,5 +1,6 @@
 const express = require('express');
-const router = express.Router({mergeParams: true});
+
+const router = express.Router({ mergeParams: true });
 const auth = require('./helpers/auth');
 const Room = require('../models/room');
 const Post = require('../models/posts');
