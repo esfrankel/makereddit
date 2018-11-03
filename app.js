@@ -45,7 +45,7 @@ app.use((err, req, res) => {
   res.render('error');
 });
 
-const mongoURI = 'mongodb://ms-user:makeschool1@ds127781.mlab.com:27781/makereddit';
+const mongoURI = 'mongodb://master:stanford1@ds151383.mlab.com:51383/crisis-predictor';
 
 mongoose.connect(mongoURI);
 mongoose.Promise = global.Promise;
